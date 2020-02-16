@@ -1,0 +1,59 @@
+.container {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.header-text {
+    font-size: large;
+}
+
+.tour-title {    
+    font-size: 18px;
+}
+
+.tour-description {    
+    font-size: 16px;
+    color: grey;
+}
+
+.btn-more {
+    border-radius: 20px;
+    min-width: 120px;
+    font-size: 18px;
+}
+
+.rating .fa {
+    color: black;
+    font-size: 18px;
+}
+
+.rating .checked {
+    color: orange;
+}
+
+.search {
+    background: #f1f1f1;
+    border: 1px solid #000000;
+    height: 400px;
+}
+
+.pagination > li > a {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #ffffff;
+    background-color: gray;
+    border-color:gray;
+}
+
+.pagination > .active > span
+{
+    color: white;
+    background-color: #141a16 !Important;
+    border: solid 1px #141a16 !Important;
+}

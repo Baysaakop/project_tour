@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}
+Tours
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/tour.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="tourimage">
+    <img class="imgtop" src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}">
+    <div class="center-text">
+        <h1>{{ tour.name }}</h1>
+    </div>
+</div>
+<div class="container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#details">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#itinerary">Itinerary</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+        </li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="row p-3">
+        <div class="col-md-9">
+            <div class="tab-content">
+                <div id="details" class="container tab-pane active"><br>
+                    <div class="row">
+                        <div class="col-md-4 p-3 text-center">
+                            <div class="circle">
+                                <i class="fa fa-calendar"></i>
+                                <h4>Jun-Sep</h4>
+                                <p class="text-muted">Dates</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 p-3 text-center">
+                            <div class="circle">
+                                <i class="fa fa-clock-o"></i>
+                                <h4>{{ tour.duration }} days</h4>
+                                <p class="text-muted">Duration</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 p-3 text-center">
+                            <div class="circle">
+                                <i class="fa fa-money"></i>
+                                <h4>{{ tour.currency }}{{ tour.price }}</h4>
+                                <p class="text-muted">Price</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for type in tour.tour_type.all %}
+                        <div class="p-2">
+                            <a class="btn btn-outline-dark" href="#">{{ type.name }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <h3>DETAILS</h3>
+                    <p>{{ tour.description }}</p>
+                    <h3>DURATION</h3>
+                    <p>{{ tour.duration }} days</p>
+                    <h3>PRICE</h3>
+                    <p>{{ tour.currency }}{{ tour.price }}</p>
+                    <h3>TYPE</h3>
+                    {% for type in tour.tour_type.all %}
+                    <p>- {{ type }}</p>
+                    {% endfor %}
+                </div>
+                <div id="itinerary" class="container tab-pane fade"><br>
+                    <h3>Itinerary</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div id="photos" class="container tab-pane fade"><br>
+                    <h3>Photos</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 rounded p-3 text-center book">
+            <h4>Book the tour</h4>
+            <span>Fill the form and book the tour!</span>            
+        </div>
+    </div>    
+</div>
+{% endblock %}

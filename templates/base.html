@@ -1,0 +1,159 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% trans 'Tour Bridge Mongolia' %}{% endblock %}</title>        
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand|Ranga&display=swap" rel="stylesheet">
+        {% block stylesheet %}
+        {% endblock %}
+    </head>
+    <body>
+        <header id="top" class="sticky-top">
+            <div id="socialbuttons"> 
+                <div id="topleft">
+                    <a href="#"><i class="fa fa-envelope-o"></i></a>
+                    <span id="contactmail" style="color: #ffffff;">tourbridgemongolia@gmail.com</span>
+                    <a href="#"><i class="fa fa-phone"></i></a>
+                    <span id="contactphone" style="color: #ffffff;">+976 99111199</span>
+                </div>
+                <div id="topright">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-google"></i></a>
+                    <a href="#"><i class="fa fa-user"></i></a>                                        
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input type="hidden" name="text" value="{{ redirect_to }}">
+                        <select name="language" id="language" onchange="this.form.submit()">
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                    {{ language.name_local }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    <!-- 
+                    <button type="button" id="language" class="dropdown-toggle border-0" data-toggle="dropdown">
+                        English
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">{% trans 'English' %}</a>
+                        <a class="dropdown-item" href="#">{% trans 'Chinese' %}</a>
+                        <a class="dropdown-item" href="#">{% trans 'Japanese' %}</a>
+                        <a class="dropdown-item" href="#">{% trans 'Korean' %}</a>
+                    </div>   -->
+                </div> 
+            </div>                                            
+            
+            <nav class="navbar navbar-expand-md navbar-light container">
+                <a class="navbar-brand" href="{% url 'home' %}">{% trans 'Tour Bridge Mongolia' %}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}" active>Home</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'tours' %}">Tours</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Events</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>                            
+                        </li>
+                        {% if user.is_authenticated %}                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>                         
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Sign in</a>                         
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            
+        </header>
+        <div id="mid">
+        {% block content %}  
+        {% endblock %}
+        </div>
+        <footer class="mt-5">
+            <div id="contanct" class="jumbotron jumbotron-fluid mb-0">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-3 mt-3 text-left">
+                          <h5>ABOUT US</h5>
+                          <p>We are a small company based in Ulaanbaatar which delivers outstanding adventure travel experiences.</p>
+                        </div>
+                        <div class="col-md-3 mt-3 text-left">
+                            <h5>TOURS</h5>
+                            <ul class="footer-list">
+                                <li><a class="footer-tour" href="#">Tour number 1</a></li>
+                                <li><a class="footer-tour" href="#">Tour number 2</a></li>
+                                <li><a class="footer-tour" href="#">Tour number 3</a></li>
+                                <li><a class="footer-tour" href="#">Tour number 4</a></li>
+                                <li><a class="footer-tour" href="#">Tour number 5</a></li>
+                                <li><a class="footer-tour" href="#">Tour number 6</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 mt-3 text-left">
+                            <h5>EVENTS</h5>
+                            <ul class="footer-list">
+                                <li><a class="footer-event" href="#">Event number 1</a></li>
+                                <li><a class="footer-event" href="#">Event number 2</a></li>
+                                <li><a class="footer-event" href="#">Event number 3</a></li>
+                                <li><a class="footer-event" href="#">Event number 4</a></li>
+                                <li><a class="footer-event" href="#">Event number 5</a></li>
+                                <li><a class="footer-event" href="#">Event number 6</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 mt-3 text-left">
+                            <h5>CONTACT US</h5>
+                            <ul class="footer-list">
+                                <li><i class="fa fa-map-marker"></i> Building, District, City</li>
+                                <li><i class="fa fa-phone"></i> +976 99111199</li>
+                                <li><i class="fa fa-envelope"></i> tourbridgemongol@mail.com</li>
+                                <li><i class="fa fa-facebook"></i> tourbridgemongoliaofficial</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bot" class="p-4">
+                <div id="botleft">
+                    <small>COPYRIGHT &copy; 2000-2020 TOUR BRIDGE MONGOLIA</small>
+                </div>
+                <div id="botright">
+                    <a class="footer-link" href="#">HOME</a>
+                    <a class="footer-link" href="#">ABOUT</a>
+                    <a class="footer-link" href="#">TOURS</a>
+                    <a class="footer-link" href="#">EVENTS</a>
+                    <a class="footer-link" href="#">BLOG</a>
+                </div>     
+            </div>          
+        </footer>
+    </body>
+</html>

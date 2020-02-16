@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>This is profile</h4>
+    <p>Welcome to your profile {{ user.username }}</p>
+    <p>Your email address: {{ user.email }}</p>    
+    <p><a href="{% url 'password_change' %}">Change password</a></p>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+</div>
+{% endblock %}

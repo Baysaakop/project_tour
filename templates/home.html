@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- SECTION - CAROUSEL -->
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel" data-slide-to="1"></li>
+    <li data-target="#carousel" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}" alt="1">
+      <div class="carousel-caption">
+        <h1>Forest</h1>
+        <p>We had such a great time in Terelj!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/carousel/low_poly_wild_west-wallpaper-2560x1080.jpg' %}" alt="2">
+      <div class="carousel-caption">
+        <h1>Desert</h1>
+        <p>What wonderful desert!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/carousel/nice_illustration-wallpaper-2560x1080.jpg' %}" alt="3">
+      <div class="carousel-caption">
+        <h1>Mountain</h1>
+        <p>Adventures in Country side!</p>
+      </div>   
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<!-- SECTION - ADVANTAGES -->
+
+<div id="advantages" class="jumbotron jumbotron-fluid">
+  <div class="container  text-center">
+    <h1 style="font-weight: bold;">WHY CHOOSE US?</h1>      
+    <hr class="rounded">
+    <div class="row text-left">
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-globe"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Diverse Destinations</strong>
+          <p class="advantage-text">Habitasse. Nunc mollis erat dapibus in commodo eu nisi. Odio purus magnis lorem.</p>
+        </div>
+      </div>
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-usd"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Value for Money</strong>
+          <p class="advantage-text">Nulla imperdiet dictum laoreet netus. Habitant ullamcorper. Auctor auctor cras.</p>
+        </div>
+      </div>
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-camera"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Beautiful Places</strong>
+          <p class="advantage-text">Eu molestie Purus ac. Facilisis hac in metus nunc parturient ornare consequat enim.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row text-left">
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-calendar-check-o"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Fast Booking</strong>
+          <p class="advantage-text">Torquent egestas. Per integer placerat ipsum quam adipiscing vehicula nisi.</p>
+        </div>
+      </div>
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-comments"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Support Team</strong>
+          <p class="advantage-text">Turpis accumsan. Proin id ligula suspendisse. Aliquet fringilla, aptent eu dignissim.</p>
+        </div>
+      </div>
+      <div class="col d-flex flex-row">
+        <div class="p-2">
+          <i class="fa fa-heart-o"></i>
+        </div>
+        <div class="p-2">
+          <strong class="advantage-title">Passionate Travel</strong>
+          <p class="advantage-text">Metus cubilia aenean. Fusce, dapibus netus nullam interdum ut vehicula.</p>
+        </div>
+      </div>
+    </div>
+    <div class="media border border-dark rounded p-3 mt-3" style="background: white;">
+      <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+      <div class="media-body text-left">
+        <h4>John Doe <small><i>/CEO of Tour Bridge Mongolia/</i></small></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>      
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION - SUGGESTED TOURS -->
+
+<div id="suggestedtours" class="mt-5">
+  <div class="container text-center">
+    <h1 style="font-weight: bold;">SUGGESTED TOURS</h1> 
+    <hr class="rounded">     
+    <div class="row text-left pl-3">
+      <div class="col-12 col-lg-10 pt-1 vl">
+        Mauris ut gravida tortor. Proin eget volutpat leo. Aliquam ultricies massa in sapien tempus.
+      </div>
+      <div class="col-12 col-lg-2 text-right">
+        <a href="#" class="btn btn-dark btn-more" role="button">Show more</a>
+      </div>
+    </div>      
+    <div class="card-deck mt-3">
+      <div class="card shadow">
+        <a href="#"><img class="card-img-top" src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}" alt="Card image cap"></a>
+        <div class="card-body text-left">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">Forest travel</h5>
+            <a class="link-more" class="" href="#">More</a>
+          </div>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+        <div class="d-flex justify-content-start" style="width: 100%; min-height: 50px;">
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-clock-o"></i>3 days
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-credit-card"></i>399$
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-users"></i>6/10
+          </div>
+        </div>
+      </div>
+      <div class="card shadow">
+        <a href="#"><img class="card-img-top" src="{% static 'img/carousel/low_poly_wild_west-wallpaper-2560x1080.jpg' %}" alt="Card image cap"></a>
+        <div class="card-body text-left">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">Gobi desert tour</h5>
+            <a class="link-more" href="#">More</a>
+          </div>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+        <div class="d-flex justify-content-start" style="width: 100%; min-height: 50px;">
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-clock-o"></i>5 days
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-credit-card"></i>599$
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-users"></i>7/8
+          </div>
+        </div>
+      </div>
+      <div class="card shadow">
+        <a href="#"><img class="card-img-top" src="{% static 'img/carousel/nice_illustration-wallpaper-2560x1080.jpg' %}" alt="Card image cap"></a>
+        <div class="card-body text-left">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">Mountain hiking</h5>
+            <a class="link-more" href="#">More</a>
+          </div>          
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+        <div class="d-flex justify-content-start" style="width: 100%; min-height: 50px;">
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-clock-o"></i>7 days
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-credit-card"></i>999$
+          </div>
+          <div class="border p-3" style="width: 34%;">
+            <i class="fa fa-users"></i>4/5
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION - EVENTS -->
+
+<div class="jumbotron jumbotron-fluid mt-5" id="events">
+  <div class="container text-center">
+    <h1 style="font-weight: bold;">EVENTS AND HOLIDAYS</h1>
+    <hr class="rounded">
+    <div class="row text-left pl-3">
+      <div class="col-12 col-lg-10 pt-1 vl">
+        Mauris ut gravida tortor. Proin eget volutpat leo. Aliquam ultricies massa in sapien tempus.
+      </div>
+      <div class="col-12 col-lg-2 text-right">
+        <a href="#" class="btn btn-outline-dark btn-more" role="button">Show more</a>
+      </div>
+    </div>     
+    <div class="row">
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/city_107-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Night life</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/colorful_landscape_illustration-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Spring holiday</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/firewatch_flat_landscape-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Sunrise view</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/love_nature_4-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Forest ceremony</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/horse_polygon_design-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Horce racing</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/low_poly_river_landscape_design-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Desert event</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/train_travel_illustration-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Snow holiday</h5>
+        </div>
+      </div>
+      <div class="col mt-4 event">
+        <img class="event-image" src="{% static 'img/events/wolf_howling_at_the_moon-wallpaper-1024x1024.jpg' %}" alt="Event image cap" style="width: 250px; height: auto;">
+        <div class="content p-2">
+          <h5>Night beauty</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION BLOG -->
+
+<div id="blog">
+  <div class="container text-center">
+    <h1 style="font-weight: bold;">LATEST POST</h1>
+    <hr class="rounded">
+    <div class="row">
+      <div class="col-12 col-md-6 mt-3 blog">
+        <a href="#"><img src="{% static 'img/blog/van_life-wallpaper-1920x1080.jpg' %}"></a>
+        <div class="text-block rounded shadow p-3">
+          <h3>Before you go</h3>
+          <p>Moved it signs Under without can't also shall forth subdue make fifth without you Brought. Fruit firmament creepeth image, man lights.</p>
+          <a href="#" class="btn btn-outline-dark btn-more" role="button">Read more</a>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mt-3 blog">
+        <a href="#"><img src="{% static 'img/blog/lowpoly_mountains_landscape-wallpaper-1920x1080.jpg' %}"></a>
+        <div class="text-block rounded shadow p-3">
+          <h3>Advice for winter</h3>
+          <p>Uno dos tres quatro. Messimio qualere dos buno carta del sito matorendunsi casca sav sodia sika. Bojur no mi ajedito calziare.</p>
+          <a href="#" class="btn btn-dark btn-more" role="button" >Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
