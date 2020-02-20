@@ -31,12 +31,12 @@ def tours(request):
 class TourListView(ListView):
     context_object_name = 'tours'
     template_name = 'tours.html'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(TourListView, self).get_context_data(**kwargs)
         context['tours'] = Tour.objects.filter(language = translation.get_language()).order_by('-last_updated')
-        paginator = Paginator(context['tours'], 2)
+        paginator = Paginator(context['tours'], 5)
         page = self.request.GET.get('page', 1)
         
         try:

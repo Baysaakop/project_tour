@@ -113,7 +113,6 @@ LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
     ('en', 'English'),
-    ('zh-cn', 'Simplified Chinese'),
     ('ja', 'Japanese'),
     ('ko', 'Korean'),
 )

@@ -10,14 +10,121 @@ Tours
 {% endblock %}
 
 {% block content %}
-<div class="tourimage">
-    <img class="imgtop" src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}">
-    <div class="center-text">
+<div class="tourimage" id="tourimage">
+    <img src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}">
+    <div class="name">
         <h1>{{ tour.name }}</h1>
     </div>
 </div>
-<div class="container">
-    <!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#details">Details</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#itinerary">Itinerary</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+    </li>
+</ul>
+<div class="row">
+     <div class="col-lg-9">
+        <div class="shadow rounded border" id="info">
+            <div class="tab-content p-3">
+                <div id="details" class="container tab-pane active">
+                    <h5>Description</h5>
+                    <p>{{ tour.description }}</p>
+                    <hr>
+                    <h5>Duration</h5>
+                    <p>{{ tour.duration }} days</p>
+                    <hr>                    
+                    <h5>Included</h5>
+                    <p>{{ tour.includes }}</p>
+                    <hr>
+                    <h5>Not included</h5>
+                    <p>{{ tour.notincludes }}</p>
+                    <hr>
+                    <h5>Price</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Number of people</th>
+                                <th>Price per person</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for price in tour.price.all %}
+                            <tr>
+                                <td>{{ price.people }} {% if price.people == 1 %} person {% else %} people {% endif %}</td>
+                                <td>{{ tour.currency }}{{ price.price_per }}</td>
+                                <td>{{ tour.currency }}{{ price.price_total }}</td>
+                            </tr>
+                            {% endfor %}   
+                        </tbody>
+                    </table>                                     
+                </div>
+                <div id="itinerary" class="container tab-pane fade">
+                    {% for iti in tour.itinerary.all %}
+                    <h5>Day {{ iti.day }}</h5>
+                    <strong>{{ iti.name_en }}</strong>
+                    <p>{{ iti.description }}</p>
+                    {% endfor %}
+                    <h3>Itinerary</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div id="photos" class="container tab-pane fade">
+                    <h3>Photos</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start text-center" id="tourlinks">
+                <div class="border p-3" style="width: 20%;">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+                <div class="border p-3" style="width: 20%;">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+                <div class="border p-3" style="width: 20%;">
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+                <div class="border p-3" style="width: 20%;">
+                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                </div>
+                <div class="border p-3" style="width: 20%;">
+                    <a href="#"><i class="fa fa-google"></i></a>
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="col-lg-3">
+         <div class="shadow rounded border" id="booking">
+             <div class="content p-3 text-center">
+                <h4>Book the tour</h4>
+                <span>Fill the form and book the tour!</span>          
+                <form action="#">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name" id="name">
+                    </div>
+                    <div class="form-group">                    
+                        <input type="email" class="form-control" placeholder="Email address" id="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Phone number" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Date" id="date">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Number of people" id="number">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Book now</button>
+                </form>  
+            </div>
+        </div>
+     </div>
+</div>
+<!-- <div class="container">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#details">Details</a>
@@ -29,36 +136,28 @@ Tours
             <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
         </li>
     </ul>
-    
-    <!-- Tab panes -->
     <div class="row p-3">
-        <div class="col-md-9">
+        <div class="col-md-9 info">
             <div class="tab-content">
                 <div id="details" class="container tab-pane active"><br>
-                    <div class="row">
-                        <div class="col-md-4 p-3 text-center">
-                            <div class="circle">
-                                <i class="fa fa-calendar"></i>
-                                <h4>Jun-Sep</h4>
-                                <p class="text-muted">Dates</p>
-                            </div>
+                    <div class="d-flex flex-md-row flex-column justify-content-md-around justify-content-center text-center">
+                        <div class="circle">
+                            <i class="fa fa-calendar"></i>
+                            <h4>Jun-Sep</h4>
+                            <p class="text-muted">Dates</p>
                         </div>
-                        <div class="col-md-4 p-3 text-center">
-                            <div class="circle">
-                                <i class="fa fa-clock-o"></i>
-                                <h4>{{ tour.duration }} days</h4>
-                                <p class="text-muted">Duration</p>
-                            </div>
+                        <div class="circle">
+                            <i class="fa fa-clock-o"></i>
+                            <h4>{{ tour.duration }} days</h4>
+                            <p class="text-muted">Duration</p>
                         </div>
-                        <div class="col-md-4 p-3 text-center">
-                            <div class="circle">
-                                <i class="fa fa-money"></i>
-                                <h4>{{ tour.currency }}{{ tour.price }}</h4>
-                                <p class="text-muted">Price</p>
-                            </div>
+                        <div class="circle">
+                            <i class="fa fa-money"></i>
+                            <h4>{{ tour.currency }}{{ tour.price }}</h4>
+                            <p class="text-muted">Price</p>
                         </div>
                     </div>
-                    <div class="d-flex flex-row">
+                    <div class="d-flex flex-row" id="tourtypes">
                         {% for type in tour.tour_type.all %}
                         <div class="p-2">
                             <a class="btn btn-outline-dark" href="#">{{ type.name }}</a>
@@ -85,12 +184,57 @@ Tours
                     <h3>Photos</h3>
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
                 </div>
+                <div class="d-flex justify-content-start text-center" id="tourlinks">
+                    <div class="border p-3" style="width: 20%;">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </div>
+                    <div class="border p-3" style="width: 20%;">
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                    <div class="border p-3" style="width: 20%;">
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </div>
+                    <div class="border p-3" style="width: 20%;">
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                    <div class="border p-3" style="width: 20%;">
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>                
             </div>
         </div>
-        <div class="col-md-3 rounded p-3 text-center book">
+        <div class="col-md-3 p-3 text-center booking">
             <h4>Book the tour</h4>
-            <span>Fill the form and book the tour!</span>            
+            <span>Fill the form and book the tour!</span>          
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" id="name">
+                </div>
+                <div class="form-group">                    
+                    <input type="email" class="form-control" placeholder="Email address" id="email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Phone number" id="phone">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Date" id="date">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Number of people" id="number">
+                </div>
+                <button type="submit" class="btn btn-dark">Book now</button>
+            </form>  
         </div>
-    </div>    
-</div>
+    </div>   
+    <div class="row m-3">
+        <div class="col-md-9 reviews">
+            <h3>TOUR REVIEWS</h3>
+            <hr>
+            <p>There are no reviews yet.</p>
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+    </div> 
+</div> -->
 {% endblock %}

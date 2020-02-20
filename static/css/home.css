@@ -1,168 +1,192 @@
-.carousel-inner img {
-    width: 100%;
-    height: auto;
+#carousel .carousel-inner img {
+  width: 100%;
+  height: auto;
 }
 
-.carousel-caption {
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.75);
-    color: #ffffff;
+#carousel .carousel-caption {
+  background: black;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
 }
 
-hr.rounded {
-    border-top: 1px solid #bbb;
-    border-radius: 1px;
+@media screen and (max-width: 576px) {
+  #carousel .carousel-caption p {
+    visibility: hidden;
+    display: none;
+  }
+  #carousel .carousel-caption h1 {
+    font-size: medium;
+  }
+  #carousel .carousel-caption {
+    max-height: 60px;
+  }
+}
+
+#advantages hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
 }
 
 #advantages .fa {
-    padding: 13px;
-    font-size: 24px;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 5px;
-    border-radius: 50%;
-    background: #141a16;
-    color: white;
+  padding: 13px;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 5px;
+  border-radius: 50%;
+  background: #141a16;
+  color: white;
 }
 
-.advantage-title {    
-    font-size: 18px;
+#advantages .advantage-title {
+  font-size: 18px;
 }
 
-.advantage-text {    
-    font-size: 16px;
-    color: grey;
+#advantages .advantage-text {
+  font-size: 16px;
+  color: grey;
 }
 
-.vl {
-    border-left: 4px solid #141a16;
-    height: 30px;        
+#suggestedtours {
+  background: #ffffff;
 }
 
-.btn-more {
-    border-radius: 20px;
-    min-width: 150px;
-    font-size: 18px;
+#suggestedtours hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
 }
 
-.card-img-top {
-    opacity: 1;
-    transition: opacity .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
+#suggestedtours .vl {
+  border-left: 4px solid #141a16;
+  height: 30px;
 }
 
-.card-img-top:hover {
-    opacity: 0.5;
+#suggestedtours .btn-more {
+  border-radius: 20px;
+  min-width: 150px;
+  font-size: 18px;
 }
 
-.link-more {
-    color: #141a16;
-    text-decoration: none;
+#suggestedtours .card-img-top {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 
-.link-more:hover {
-    color: #141a16;
-    text-decoration: none;
+#suggestedtours .card-img-top:hover {
+  opacity: 0.5;
 }
 
-.link-more:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #141a16;
-    transition: width .3s;
+#suggestedtours .link-more {
+  color: #141a16;
+  text-decoration: none;
 }
 
-.link-more:hover::after {
-    width: 100%;
-    color: #141a16;
+#suggestedtours .link-more:hover {
+  color: #141a16;
+  text-decoration: none;
+}
+
+#suggestedtours .link-more:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #141a16;
+  -webkit-transition: width .3s;
+  transition: width .3s;
+}
+
+#suggestedtours .link-more:hover::after {
+  width: 100%;
+  color: #141a16;
 }
 
 #suggestedtours .fa {
-    padding: 3px;
-    font-size: 18px;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50%;
-    color: #141a16;
+  padding: 3px;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #141a16;
 }
 
-.event {
-    position: relative;
-    transition: transform .2s;
+@media screen and (max-width: 576px) {
+  #suggestedtours .vl {
+    border-left: 4px solid #141a16;
+    height: 80px;
+  }
 }
 
-.event:hover {
-    transform: scale(1.1);
+#events hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
 }
 
-.event .content {
-    position: absolute; /* Position the background text */
-    left: 50%;
-    transform: translate(-50%, 0%);
-    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
-    background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.75); /* Black background with 0.5 opacity */
-    color: #f1f1f1; /* Grey text */
-    width: 250px;    
-    height: 40px;
+#events .vl {
+  border-left: 4px solid #141a16;
+  height: 30px;
 }
 
-.blog {
-    position: relative;
+#events .btn-more {
+  border-radius: 20px;
+  min-width: 150px;
+  font-size: 18px;
 }
 
-.blog img {
-    max-width: 500px;
-    height: auto;
+#events .event {
+  position: relative;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
 }
 
-.blog img:hover  {
-    opacity: 0.5;
+#events .event:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
-.blog .text-block {
-    transform: translate(17%, -50%);
-    background-color: #ffffff;
-    color: #000000;
-    width: 400px;
-    
+#events .event .content {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+  bottom: 0;
+  background: black;
+  background: rgba(0, 0, 0, 0.75);
+  color: #f1f1f1;
+  width: 250px;
+  height: 40px;
 }
 
-@media screen and (max-width: 448px) {
-    .carousel-caption p {
-        visibility: hidden;
-        display: none;
-    }
-
-    .carousel-caption h1 {
-        font-size: medium;
-    }
-
-    .carousel-caption {
-        max-height: 60px;
-    }
-
-    .blog img {
-        max-width: 300px;
-        height: auto;
-    }
-
-    .blog .text-block {
-        max-width: 300px;
-        transform: translate(8%, 0%);
-        margin-bottom: 30px;
-    }
+@media screen and (max-width: 576px) {
+  #events .vl {
+    border-left: 4px solid #141a16;
+    height: 80px;
+  }
 }
 
-@media screen and (max-width: 768px) {
-    .vl {
-        height: 60px;        
-    }
+#blog .post img {
+  max-width: 80%;
+  height: auto;
 }
+
+#blog .post .text-block {
+  background: #ffffff;
+  color: #000000;
+  position: relative;
+  margin: -20% 20% 10% 20%;
+}
+
+@media screen and (max-width: 576px) {
+  #blog .post .text-block {
+    margin: 0% 10% 10% 10%;
+  }
+}
+/*# sourceMappingURL=home.css.map */

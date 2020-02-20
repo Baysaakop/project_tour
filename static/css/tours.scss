@@ -1,0 +1,94 @@
+$desktop: 1200px; // xl
+$laptop: 992px; // lg
+$tablet: 768px; // md
+$phone: 576px; // sm
+
+#tours {
+    #tour {
+
+        #image {
+            display: inline-block;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;    
+                display: block;
+                transition: transform .4s;
+            }
+        }
+
+        #image:hover img {
+            transform: scale(1.3);
+            transform-origin: 50% 50%;
+        }
+
+        .detail {
+            border-left: 1px solid #ced4da;
+        }
+
+        .view {
+            border-radius: 20px;
+            min-width: 120px;
+            font-size: 18px;
+        }
+
+        .rating .fa {
+            color: black;
+            font-size: 18px;
+        }
+
+        .rating .checked {
+            color: orange;
+        }  
+
+        @media screen and (max-width:$phone) {
+            .detail {
+                border-top: 1px solid #ced4da;
+            }
+        }
+    }
+
+    #searchbar {
+        
+        @media screen and (max-width:$laptop) {
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        @media screen and (max-width:$phone) {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+    }
+}
+
+.pagination {
+    li {
+        a {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        a:focus,
+        a:hover,
+        span:focus,
+        span:hover
+        {
+            color: #ffffff;
+            background-color: #30363B;
+            border-color:#30363B;
+        }
+
+        .active {
+            color: white;
+            background-color: #30363B;
+            border: solid 1px #30363B;            
+        }
+
+        .active:hover {
+            background-color: #141a16;
+            border: solid 1px #141a16;            
+        }
+    }
+}

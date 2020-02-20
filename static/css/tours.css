@@ -1,59 +1,86 @@
-.container {
-    font-family: 'Quicksand', sans-serif;
+#tours #tour #image {
+  display: inline-block;
+  overflow: hidden;
 }
 
-.header-text {
-    font-size: large;
+#tours #tour #image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-transition: -webkit-transform .4s;
+  transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s, -webkit-transform .4s;
 }
 
-.tour-title {    
-    font-size: 18px;
+#tours #tour #image:hover img {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
 }
 
-.tour-description {    
-    font-size: 16px;
-    color: grey;
+#tours #tour .detail {
+  border-left: 1px solid #ced4da;
 }
 
-.btn-more {
-    border-radius: 20px;
-    min-width: 120px;
-    font-size: 18px;
+#tours #tour .view {
+  border-radius: 20px;
+  min-width: 120px;
+  font-size: 18px;
 }
 
-.rating .fa {
-    color: black;
-    font-size: 18px;
+#tours #tour .rating .fa {
+  color: black;
+  font-size: 18px;
 }
 
-.rating .checked {
-    color: orange;
+#tours #tour .rating .checked {
+  color: orange;
 }
 
-.search {
-    background: #f1f1f1;
-    border: 1px solid #000000;
-    height: 400px;
+@media screen and (max-width: 576px) {
+  #tours #tour .detail {
+    border-top: 1px solid #ced4da;
+  }
 }
 
-.pagination > li > a {
-    background-color: #ffffff;
-    color: #000000;
+@media screen and (max-width: 992px) {
+  #tours #searchbar {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 }
 
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover
-{
-    color: #ffffff;
-    background-color: gray;
-    border-color:gray;
+@media screen and (max-width: 576px) {
+  #tours #searchbar {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }
 
-.pagination > .active > span
-{
-    color: white;
-    background-color: #141a16 !Important;
-    border: solid 1px #141a16 !Important;
+.pagination li a {
+  background-color: #ffffff;
+  color: #000000;
 }
+
+.pagination li a:focus,
+.pagination li a:hover,
+.pagination li span:focus,
+.pagination li span:hover {
+  color: #ffffff;
+  background-color: #30363B;
+  border-color: #30363B;
+}
+
+.pagination li .active {
+  color: white;
+  background-color: #30363B;
+  border: solid 1px #30363B;
+}
+
+.pagination li .active:hover {
+  background-color: #141a16;
+  border: solid 1px #141a16;
+}
+/*# sourceMappingURL=tours.css.map */
