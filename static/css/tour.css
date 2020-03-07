@@ -1,10 +1,11 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 #tourimage {
   position: relative;
 }
 
 #tourimage img {
-  max-height: 500px;
   width: 100%;
+  height: auto;
 }
 
 #tourimage .name {
@@ -17,6 +18,7 @@
   width: 60%;
   padding: 20px;
   text-align: center;
+  font-size: 36px;
 }
 
 @media screen and (max-width: 576px) {
@@ -27,6 +29,7 @@
     padding: 5px;
     position: relative;
     width: 100%;
+    font-size: 24px;
   }
 }
 
@@ -36,15 +39,24 @@ ul.nav .nav-link {
   font-weight: bold;
 }
 
-#info {
-  margin: 20px 0px 20px 20px;
+#info #details .detail {
+  background: #f1f1f1;
+}
+
+#info #details .fa {
+  padding: 10px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
 }
 
 #info #tourlinks .fa {
   font-size: 25px;
   text-align: center;
   text-decoration: none;
-  color: #696969;
+  color: #c7c5c5;
 }
 
 #info #tourlinks .fa-facebook:hover {
@@ -67,19 +79,89 @@ ul.nav .nav-link {
   color: #cb2027;
 }
 
-@media screen and (max-width: 992px) {
-  #info {
-    margin: 20px 20px 0px 20px;
-  }
+#suggestions .suggestedtour {
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 20px;
+  position: relative;
 }
 
-#booking {
-  margin: 20px 20px 20px 0px;
+#suggestions .suggestedtour img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-transition: -webkit-transform .4s;
+  transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s, -webkit-transform .4s;
 }
 
-@media screen and (max-width: 992px) {
-  #booking {
-    margin: 20px 20px 20px 20px;
-  }
+#suggestions .suggestedtour .title {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  color: #ffffff;
+}
+
+#suggestions .suggestedtour .price {
+  position: absolute;
+  top: 75%;
+  right: 5%;
+  color: #ffffff;
+}
+
+#suggestions .suggestedtour:hover img {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+#review .fa-star {
+  color: #ddd;
+}
+
+#review .checked {
+  color: #FFD700;
+}
+
+#review .rating input {
+  display: none;
+}
+
+#review .rating label {
+  font-size: 22px;
+  float: right;
+  margin-right: 10px;
+}
+
+#review .rating input:checked ~ label {
+  color: #FFD700;
+}
+
+#review .rating input:checked + label:hover,
+#review .rating input:checked ~ label:hover,
+#review .rating label:hover ~ input:checked ~ label,
+#review .rating input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
+#review .rating:not(:checked) label:hover,
+#review .rating:not(:checked) label:hover ~ label {
+  color: #FFD700;
+}
+
+#review .like input {
+  display: none;
+}
+
+#review .like label {
+  color: #ddd;
+  font-size: 22px;
+}
+
+#review .like input:checked ~ label,
+#review .like label:hover {
+  color: #6262f5;
 }
 /*# sourceMappingURL=tour.css.map */

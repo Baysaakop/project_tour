@@ -14,16 +14,20 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns (
     path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
 
     ## Tours
     path('tours/', views.TourListView.as_view(), name='tours'),
-    # path('tours/', views.tours, name='tours'),
     path('tour/<int:pk>/', views.tour, name='tour'),    
+    path('touredit/', views.touredit, name='touredit'),
+    path('touradd/', views.touradd, name='touradd'),
+    # path('tours/', views.tours, name='tours'),
 
     ## Accounts
-    path('profile/', accounts_views.profile, name='profile'),
+    path('profile/<int:id>/', accounts_views.profile, name='profile'),
     path('signup/', accounts_views.signup, name='signup'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('profile/edit/', accounts_views.UserUpdateView.as_view(), name='edit_profile'),
 )
 
 if settings.DEBUG:

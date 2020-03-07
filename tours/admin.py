@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Tour, TourType, Price, Itinerary
+from .models import Tour, TourType, Price, Itinerary, TourImage, TourReview
 
 admin.site.register(Tour)
 admin.site.register(TourType)
 admin.site.register(Price)
 admin.site.register(Itinerary)
+admin.site.register(TourImage)
+admin.site.register(TourReview)
