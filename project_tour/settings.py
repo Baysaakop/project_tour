@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'oydoj%%6oaw1i+1qjq0cdv=t*or-=a*lds_&=2(swo#olv=90+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['montour.herokuapp.com', '127.0.0.1']
 
