@@ -1,10 +1,11 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 #tourimage {
   position: relative;
 }
 
 #tourimage img {
-  max-height: 500px;
   width: 100%;
+  height: auto;
 }
 
 #tourimage .name {
@@ -17,6 +18,7 @@
   width: 60%;
   padding: 20px;
   text-align: center;
+  font-size: 36px;
 }
 
 @media screen and (max-width: 576px) {
@@ -27,6 +29,7 @@
     padding: 5px;
     position: relative;
     width: 100%;
+    font-size: 24px;
   }
 }
 
@@ -36,50 +39,178 @@ ul.nav .nav-link {
   font-weight: bold;
 }
 
-#info {
-  margin: 20px 0px 20px 20px;
+#info #details .detail {
+  background: #f1f1f1;
+}
+
+#info #details .fa {
+  padding: 10px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#info #tourlinks div {
+  cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#info #tourlinks div:hover {
+  background: #ededed;
+}
+
+#info #tourlinks div:hover .fa-facebook {
+  color: #3B5998;
+}
+
+#info #tourlinks div:hover .fa-instagram {
+  color: #125688;
+}
+
+#info #tourlinks div:hover .fa-google {
+  color: #dd4b39;
+}
+
+#info #tourlinks div:hover .fa-youtube {
+  color: #bb0000;
+}
+
+#info #tourlinks div:hover .fa-pinterest {
+  color: #cb2027;
 }
 
 #info #tourlinks .fa {
   font-size: 25px;
   text-align: center;
   text-decoration: none;
-  color: #696969;
+  color: #c7c5c5;
 }
 
-#info #tourlinks .fa-facebook:hover {
-  color: #3B5998;
+#review .fa-star {
+  color: #ddd;
 }
 
-#info #tourlinks .fa-instagram:hover {
-  color: #125688;
+#review .checked {
+  color: #FFD700;
 }
 
-#info #tourlinks .fa-google:hover {
-  color: #dd4b39;
+#review #general {
+  border-top: 1px solid #dddddd;
+  margin: 0px 5px 0px 5px;
 }
 
-#info #tourlinks .fa-youtube:hover {
-  color: #bb0000;
+#review .comment {
+  border-top: 1px solid #dddddd;
+  margin: 0px 5px 0px 5px;
 }
 
-#info #tourlinks .fa-pinterest:hover {
-  color: #cb2027;
+#review #actions {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  margin: 0px 5px 0px 5px;
 }
 
-@media screen and (max-width: 992px) {
-  #info {
-    margin: 20px 20px 0px 20px;
+#review #actions input {
+  display: none;
+}
+
+#review #actions div {
+  cursor: pointer;
+  padding-top: 20px;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#review #actions div .fa {
+  font-size: 20px;
+}
+
+#review #actions div:hover {
+  background: #ededed;
+}
+
+#review #modalRate .rating {
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 10px;
+}
+
+#review #modalRate .rating input {
+  display: none;
+}
+
+#review #modalRate .rating label {
+  font-size: 24px;
+  float: right;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+#review #modalRate .rating input:checked ~ label {
+  color: #FFD700;
+}
+
+#review #modalRate .rating input:checked + label:hover,
+#review #modalRate .rating input:checked ~ label:hover,
+#review #modalRate .rating label:hover ~ input:checked ~ label,
+#review #modalRate .rating input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
+#review #modalRate .rating:not(:checked) label:hover,
+#review #modalRate .rating:not(:checked) label:hover ~ label {
+  color: #FFD700;
+}
+
+@media screen and (max-width: 576px) {
+  #review #modalRate .rating {
+    margin-left: 15%;
+    margin-right: 15%;
   }
 }
 
-#booking {
-  margin: 20px 20px 20px 0px;
+#review #commentform {
+  margin: 0px 5px 0px 5px;
 }
 
-@media screen and (max-width: 992px) {
-  #booking {
-    margin: 20px 20px 20px 20px;
-  }
+#suggestions .suggestedtour {
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 20px;
+  position: relative;
+}
+
+#suggestions .suggestedtour img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-transition: -webkit-transform .4s;
+  transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s, -webkit-transform .4s;
+}
+
+#suggestions .suggestedtour .title {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  color: #ffffff;
+}
+
+#suggestions .suggestedtour .price {
+  position: absolute;
+  top: 75%;
+  right: 5%;
+  color: #ffffff;
+}
+
+#suggestions .suggestedtour:hover img {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
 }
 /*# sourceMappingURL=tour.css.map */

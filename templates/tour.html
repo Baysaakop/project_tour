@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load tour_tags i18n static %}
 
 {% block title %}
 Tours
@@ -9,123 +9,125 @@ Tours
 <link rel="stylesheet" href="{% static 'css/tour.css' %}">
 {% endblock %}
 
+{% block javascript %}
+<script type="text/javascript">
+    $("#divlike").click(function () {
+        var tour_id = $(this).attr("data-tourid");
+        $.ajax({
+            type: "GET",
+            url: "/liketour/",
+            data: {
+                tour_id: tour_id
+            },
+            success: function(data)
+            {
+                if (data.is_liked) {
+                    $("#divlike").prop("title", "Unlike");     
+                    $("#iconlike").attr("class", "form-check-label fa fa-thumbs-up"); 
+                    var total_likes = $("#total_likes").attr("data-number");
+                    total_likes = parseInt(total_likes, 10) + 1
+                    $("#total_likes").attr("data-number", total_likes);
+                    $("#total_likes").text(total_likes.toString() + " likes");
+                }
+                else {
+                    $("#divlike").prop("title", "Like a tour");
+                    $("#iconlike").attr("class", "form-check-label fa fa-thumbs-o-up");
+                    var total_likes = $("#total_likes").attr("data-number");
+                    total_likes = parseInt(total_likes, 10) - 1
+                    $("#total_likes").attr("data-number", total_likes);
+                    $("#total_likes").text(total_likes.toString() + " likes");
+                }                          
+            }
+        });
+    });
+
+    $("#divcomment").click(function () {
+        $("#commentarea").focus();
+    });
+
+
+    $("input[name='rating']").click(function () {
+        var tour_id = $(this).attr("data-tourid");
+        var rating = $(this).val();        
+        $.ajax({
+            type: "GET",
+            url: "/ratetour/",
+            data: {
+                tour_id: tour_id,
+                rating: rating
+            },
+            success: function(data)
+            {                
+                $("#generalrating").text(data.average.toString() + " based on " + data.count.toString() + " reviews");
+            }
+        });
+    });
+
+    $("form").submit(function (e) {
+        var tour_id = $(this).attr("data-tourid");        
+        var comment = $("#commentarea").val();        
+        $.ajax({
+            type: "GET",
+            url: "/commenttour/",
+            data: {
+                tour_id: tour_id,
+                comment: comment
+            },
+            success: function(data)
+            {
+                console.log(data.username);
+                console.log(data.comment);                
+                // var updated_at = new Date(data.updated_at);
+                // var date = updated_at.getMonth() + " " + updated_at.getDate() + ", " + updated_at.getFullYear() + ", " + updated_at.get
+                console.log(data.updated_at);
+                console.log(data.rating);
+
+                document.getElementById("commentform").reset();
+                $("#allcomments").prepend('<div class="media p-3 comment">' +
+                        '<img src="https://i.ya-webdesign.com/images/avatar-icon-png-6.png" alt="avatar" class="mr-3 rounded-circle" style="width:80px;">' +
+                        '<div class="media-body">' +
+                            '<div class="d-flex justify-content-between">' +
+                                '<div class="name">' +
+                                    '<h4>' + data.username + '</h4>' +
+                                '</div>' +                        
+                                '<div class="post-date">' +
+                                    '<small><i>' + data.updated_at + '</i></small>' +
+                                '</div>' +
+                            '</div>' + 
+                            '<div>' +
+                                '<span class="fa fa-star ' + (data.rating > 0.5 ? 'checked' : '') + '"></span>' +
+                                '<span class="fa fa-star ' + (data.rating > 1.5 ? 'checked' : '') + '"></span>' +
+                                '<span class="fa fa-star ' + (data.rating > 2.5 ? 'checked' : '') + '"></span>' +
+                                '<span class="fa fa-star ' + (data.rating > 3.5 ? 'checked' : '') + '"></span>' +
+                                '<span class="fa fa-star ' + (data.rating > 4.5 ? 'checked' : '') + '"></span>' +        
+                            '</div>' +
+                            '<p>' + data.comment + '</p>' +
+                        '</div>' +
+                    '</div>'
+                )
+            }
+        });
+        e.preventDefault();
+    });
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="tourimage" id="tourimage">
-    <img src="{% static 'img/carousel/flat_design_illustration-wallpaper-2560x1080.jpg' %}">
+    <img src="{{ tour_image.image.url }}">
     <div class="name">
-        <h1>{{ tour.name }}</h1>
+        <span>{{ tour.name }}</span>
     </div>
 </div>
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#details">Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#itinerary">Itinerary</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
-    </li>
-</ul>
-<div class="row">
-     <div class="col-lg-9">
-        <div class="shadow rounded border" id="info">
-            <div class="tab-content p-3">
-                <div id="details" class="container tab-pane active">
-                    <h5>Description</h5>
-                    <p>{{ tour.description }}</p>
-                    <hr>
-                    <h5>Duration</h5>
-                    <p>{{ tour.duration }} days</p>
-                    <hr>                    
-                    <h5>Included</h5>
-                    <p>{{ tour.includes }}</p>
-                    <hr>
-                    <h5>Not included</h5>
-                    <p>{{ tour.notincludes }}</p>
-                    <hr>
-                    <h5>Price</h5>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Number of people</th>
-                                <th>Price per person</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for price in tour.price.all %}
-                            <tr>
-                                <td>{{ price.people }} {% if price.people == 1 %} person {% else %} people {% endif %}</td>
-                                <td>{{ tour.currency }}{{ price.price_per }}</td>
-                                <td>{{ tour.currency }}{{ price.price_total }}</td>
-                            </tr>
-                            {% endfor %}   
-                        </tbody>
-                    </table>                                     
-                </div>
-                <div id="itinerary" class="container tab-pane fade">
-                    {% for iti in tour.itinerary.all %}
-                    <h5>Day {{ iti.day }}</h5>
-                    <strong>{{ iti.name_en }}</strong>
-                    <p>{{ iti.description }}</p>
-                    {% endfor %}
-                    <h3>Itinerary</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div id="photos" class="container tab-pane fade">
-                    <h3>Photos</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                </div>
-            </div>
-            <div class="d-flex justify-content-start text-center" id="tourlinks">
-                <div class="border p-3" style="width: 20%;">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                </div>
-                <div class="border p-3" style="width: 20%;">
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-                <div class="border p-3" style="width: 20%;">
-                    <a href="#"><i class="fa fa-youtube"></i></a>
-                </div>
-                <div class="border p-3" style="width: 20%;">
-                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                </div>
-                <div class="border p-3" style="width: 20%;">
-                    <a href="#"><i class="fa fa-google"></i></a>
-                </div>
-            </div>
-        </div>
-     </div>
-     <div class="col-lg-3">
-         <div class="shadow rounded border" id="booking">
-             <div class="content p-3 text-center">
-                <h4>Book the tour</h4>
-                <span>Fill the form and book the tour!</span>          
-                <form action="#">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Name" id="name">
-                    </div>
-                    <div class="form-group">                    
-                        <input type="email" class="form-control" placeholder="Email address" id="email">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Phone number" id="phone">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Date" id="date">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Number of people" id="number">
-                    </div>
-                    <button type="submit" class="btn btn-dark">Book now</button>
-                </form>  
-            </div>
-        </div>
-     </div>
-</div>
-<!-- <div class="container">
-    <ul class="nav nav-tabs" role="tablist">
+<div class="container">
+    <nav aria-label="breadcrumb" class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'tourlist' %}">Tours</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ tour.name }}</li>
+        </ol>
+    </nav>
+    <ul class="nav nav-tabs" style="max-width: 400px;" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#details">Details</a>
         </li>
@@ -136,53 +138,82 @@ Tours
             <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
         </li>
     </ul>
-    <div class="row p-3">
-        <div class="col-md-9 info">
-            <div class="tab-content">
-                <div id="details" class="container tab-pane active"><br>
-                    <div class="d-flex flex-md-row flex-column justify-content-md-around justify-content-center text-center">
-                        <div class="circle">
-                            <i class="fa fa-calendar"></i>
-                            <h4>Jun-Sep</h4>
-                            <p class="text-muted">Dates</p>
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="shadow rounded border" id="info">
+                <div class="tab-content">
+                    <div id="details" class="container tab-pane active">
+                        <div class="row">
+                            <div class="col-md-3 p-3 text-center border detail">
+                                <i class="fa fa-users"></i>
+                                <h4>5/8</h4>
+                                <p class="text-muted">People</p>
+                            </div>
+                            <div class="col-md-3 p-3 text-center border detail">
+                                <i class="fa fa-calendar"></i>
+                                <h4>Jun-Sep</h4>
+                                <p class="text-muted">Dates</p>
+                            </div>
+                            <div class="col-md-3 p-3 text-center border detail">
+                                <i class="fa fa-clock-o"></i>
+                                <h4>{{ tour.duration }} days</h4>
+                                <p class="text-muted">Duration</p>
+                            </div>
+                            <div class="col-md-3 p-3 text-center border detail">
+                                <i class="fa fa-credit-card"></i>
+                                <h4>{{tour.currency}}{{ prices|get_min:tour }}</h4>
+                                <p class="text-muted">Price</p>
+                            </div>
                         </div>
-                        <div class="circle">
-                            <i class="fa fa-clock-o"></i>
-                            <h4>{{ tour.duration }} days</h4>
-                            <p class="text-muted">Duration</p>
-                        </div>
-                        <div class="circle">
-                            <i class="fa fa-money"></i>
-                            <h4>{{ tour.currency }}{{ tour.price }}</h4>
-                            <p class="text-muted">Price</p>
-                        </div>
+                        <div class="m-3">
+                            <button class="btn btn-dark m-1">Adventure</button>
+                            <button class="btn btn-dark m-1">Outdoor</button>
+                            <button class="btn btn-dark m-1">Hiking</button>
+                            <button class="btn btn-dark m-1">Camel riding</button>
+                            <h5 class="mt-3">Description</h5>
+                            <p>{{ tour.description }}</p>
+                            <hr>
+                            <h5>Duration</h5>
+                            <p>{{ tour.duration }} days</p>
+                            <hr>                    
+                            <h5>Included</h5>
+                            <p>{{ tour.includes }}</p>
+                            <hr>
+                            <h5>Not included</h5>
+                            <p>{{ tour.notincludes }}</p>
+                            <hr>
+                            <h5>Price</h5>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Number of people</th>
+                                        <th>Price per person</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for price in prices|in_tour:tour %}
+                                    <tr>
+                                        <td>{{ price.people }} {% if price.people == 1 %} person {% else %} people {% endif %}</td>
+                                        <td>{{ tour.currency }}{{ price.price_per }}</td>
+                                        <td>{{ tour.currency }}{{ price.price_total }}</td>
+                                    </tr>
+                                    {% endfor %}   
+                                </tbody>
+                            </table>      
+                        </div>                               
                     </div>
-                    <div class="d-flex flex-row" id="tourtypes">
-                        {% for type in tour.tour_type.all %}
-                        <div class="p-2">
-                            <a class="btn btn-outline-dark" href="#">{{ type.name }}</a>
-                        </div>
-                        {% endfor %}
+                    <div id="itinerary" class="container tab-pane fade p-3">
+                        {% for itinerary in tour_itineraries %}
+                        <h5>Day {{ itinerary.day }}</h5>
+                        <strong>{{ itinerary.name_en }}</strong>
+                        <p>{{ itinerary.description }}</p>
+                        {% endfor %}                    
                     </div>
-                    <br>
-                    <h3>DETAILS</h3>
-                    <p>{{ tour.description }}</p>
-                    <h3>DURATION</h3>
-                    <p>{{ tour.duration }} days</p>
-                    <h3>PRICE</h3>
-                    <p>{{ tour.currency }}{{ tour.price }}</p>
-                    <h3>TYPE</h3>
-                    {% for type in tour.tour_type.all %}
-                    <p>- {{ type }}</p>
-                    {% endfor %}
-                </div>
-                <div id="itinerary" class="container tab-pane fade"><br>
-                    <h3>Itinerary</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div id="photos" class="container tab-pane fade"><br>
-                    <h3>Photos</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    <div id="photos" class="container tab-pane fade p-3">
+                        <h3>Photos</h3>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-start text-center" id="tourlinks">
                     <div class="border p-3" style="width: 20%;">
@@ -198,43 +229,193 @@ Tours
                         <a href="#"><i class="fa fa-pinterest"></i></a>
                     </div>
                     <div class="border p-3" style="width: 20%;">
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-google"></i></a>
                     </div>
-                </div>                
+                </div>
+            </div>
+            <div class="shadow rounded border mt-5 mb-5 p-3" id="review">
+                <h4 class="text-center">TOUR REVIEWS</h4>
+                <div class="row" id="general">
+                    <div class="col-sm-8 p-3">
+                        <span class="fa fa-star {% if rating > 0.5 %} checked {% endif %}" style="font-size: 22px;"></span>
+                        <span class="fa fa-star {% if rating > 1.5 %} checked {% endif %}" style="font-size: 22px;"></span>
+                        <span class="fa fa-star {% if rating > 2.5 %} checked {% endif %}" style="font-size: 22px;"></span>
+                        <span class="fa fa-star {% if rating > 3.5 %} checked {% endif %}" style="font-size: 22px;"></span>
+                        <span class="fa fa-star {% if rating > 4.5 %} checked {% endif %}" style="font-size: 22px;"></span>
+                        <strong class="ml-2" id="generalrating">{{ rating }} based on {{ rating_count }} reviews</strong>
+                    </div>
+                    <div class="col-sm-4 p-3 text-sm-right">
+                        <strong>{{ tour.views }} views</strong> 
+                        <strong class="ml-3" id="total_likes" data-number="{{ likes }}">{{ likes }} likes</strong> 
+                    </div>
+                </div>       
+                <div id="allcomments">
+                    {% for comment in tour_comments %}
+                    <div class="media p-3 comment">
+                        <img src="https://i.ya-webdesign.com/images/avatar-icon-png-6.png" alt="avatar" class="mr-3 rounded-circle" style="width:80px;">
+                        <div class="media-body">
+                            <div class="d-flex justify-content-between">
+                                <div class="name">
+                                    <h4>{{ comment.user.username }}</h4>
+                                </div>                        
+                                <div class="post-date"> 
+                                    <small><i>{{ comment.updated_at|date:"F d, Y" }}</i></small>
+                                </div>
+                            </div>  
+                            <div>
+                                <span class="fa fa-star {% if tour_rating.rating > 0.5 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if tour_rating.rating > 1.5 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if tour_rating.rating > 2.5 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if tour_rating.rating > 3.5 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if tour_rating.rating > 4.5 %} checked {% endif %}"></span>
+                            </div>
+                            <p>{{ comment.comment }}</p>      
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="media p-3 comment">
+                        <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" alt="John Doe" class="mr-3 rounded-circle" style="width:80px;">
+                        <div class="media-body">
+                            <div class="d-flex justify-content-between">
+                                <div class="name">
+                                    <h4>John Doe</h4>
+                                </div>                        
+                                <div class="post-date"> 
+                                    <small><i>February 20, 2020</i></small>
+                                </div>
+                            </div>  
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>      
+                        </div>
+                    </div>
+                    <div class="media p-3 comment">
+                        <img src="https://www.w3schools.com/bootstrap4/img_avatar4.png" alt="John Dowe" class="mr-3 rounded-circle" style="width:80px;">
+                        <div class="media-body">
+                            <div class="d-flex justify-content-between">
+                                <div class="name">
+                                    <h4>Jane Dove</h4>
+                                </div>                            
+                                <div class="post-date">
+                                    <small><i>February 16, 2020</i></small>
+                                </div>
+                            </div>          
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>            
+                            <p>Duis rutrum quis lacus eu mattis. Suspendisse volutpat augue eu ante elementum, id tincidunt mi imperdiet. Nullam id risus tempus.</p>      
+                        </div>
+                    </div>
+                </div>                                                    
+                <div class="row text-center" id="actions">
+                    <div class="col-4" id="divlike" data-tourid="{{ tour.id }}" title="{% if tour_like.is_liked %} Unlike {% else %} Like a tour {% endif %}">                        
+                        <input class="form-check-input" type="checkbox" id="like" name="like" {% if tour_like.is_liked %} checked {% endif %} />
+                        <label class="form-check-label {% if tour_like.is_liked %} fa fa-thumbs-up {% else %} fa fa-thumbs-o-up {% endif %}" id="iconlike" for="like"></label>
+                        <p>Like</p>
+                    </div>
+                    <div class="col-4" id="divcomment" data-tourid="{{ tour.id }}" title="Leave a comment">
+                        <input class="form-check-input" type="checkbox" id="comment" name="comment" />
+                        <label class="form-check-label fa fa-comment-o" for="comment"></label>
+                        <p>Comment</p>
+                    </div>
+                    <div class="col-4" title="Give a rating" data-toggle="modal" data-target="#modalRate">
+                        <input class="form-check-input" type="checkbox" id="rate" name="rate" data-tourid="{{ tour.id }}" />
+                        <label class="form-check-label fa fa-star-o" for="rate""></label>
+                        <p>Rate</p>
+                    </div>                                 
+                </div>          
+                <div class="modal fade" id="modalRate">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Give rating on tour:</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="rating">
+                                    <input class="form-check-input" type="radio" id="star5" name="rating" value="5" data-tourid="{{ tour.id }}" {% if tour_rating.rating == 5 %} checked {% endif %} />
+                                    <label class="form-check-label fa fa-star" for="star5" title="Awesome - 5 star"></label>      
+                                    <input class="form-check-input" type="radio" id="star4" name="rating" value="4" data-tourid="{{ tour.id }}" {% if tour_rating.rating == 4 %} checked {% endif %} />
+                                    <label class="form-check-label fa fa-star" for="star4" title="Pretty good - 4 star"></label>                                              
+                                    <input class="form-check-input" type="radio" id="star3" name="rating" value="3" data-tourid="{{ tour.id }}" {% if tour_rating.rating == 3 %} checked {% endif %} />
+                                    <label class="form-check-label fa fa-star" for="star3" title="Normal - 3 star"></label> 
+                                    <input class="form-check-input" type="radio" id="star2" name="rating" value="2" data-tourid="{{ tour.id }}" {% if tour_rating.rating == 2 %} checked {% endif %} />
+                                    <label class="form-check-label fa fa-star" for="star2" title="Kinda bad - 2 star"></label> 
+                                    <input class="form-check-input" type="radio" id="star1" name="rating" value="1" data-tourid="{{ tour.id }}" {% if tour_rating.rating == 1 %} checked {% endif %} />
+                                    <label class="form-check-label fa fa-star" for="star1" title="Very bad - 1 star"></label>  
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form method="POST" id="commentform" action="." data-tourid="{{ tour.id }}">
+                    {% csrf_token %}                        
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" rows="5" id="commentarea" name="commentarea" placeholder="Your comment"></textarea>
+                    </div>                                                              
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>                     
             </div>
         </div>
-        <div class="col-md-3 p-3 text-center booking">
-            <h4>Book the tour</h4>
-            <span>Fill the form and book the tour!</span>          
-            <form action="#">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name" id="name">
+        <div class="col-lg-3">
+            <div class="shadow rounded border" id="booking">
+                <div class="content p-3 text-center">
+                    <h4>Book the tour</h4>
+                    <span>Fill the form and book the tour!</span>          
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name" id="name">
+                        </div>
+                        <div class="form-group">                    
+                            <input type="email" class="form-control" placeholder="Email address" id="email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Phone number" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Date" id="date">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Number of people" id="number">
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-block">Book now</button>
+                    </form>  
                 </div>
-                <div class="form-group">                    
-                    <input type="email" class="form-control" placeholder="Email address" id="email">
+            </div>
+            <div class="mt-3" id="suggestions">
+                <div class="shadow rounded border p-3 text-center">
+                    <span>You might interest the following tours:</span>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Phone number" id="phone">
+                {% for tour in suggested_tours %}
+                <div class="rounded shadow suggestedtour">
+                    <a href="{% url 'tour' tour.pk %}"><img src="{{ images|of_tour:tour }}" alt="Card image cap"></a>
+                    <div class="title">
+                        <h4>{{ tour.name }}</h4>                      
+                    </div>
+                    <div class="price">
+                        <p>
+                            <del>
+                                399
+                            </del> 
+                            <strong>{{tour.currency}}{{ prices|get_min:tour }}</strong>
+                        </p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Date" id="date">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Number of people" id="number">
-                </div>
-                <button type="submit" class="btn btn-dark">Book now</button>
-            </form>  
+                {% endfor %}
+            </div>
         </div>
-    </div>   
-    <div class="row m-3">
-        <div class="col-md-9 reviews">
-            <h3>TOUR REVIEWS</h3>
-            <hr>
-            <p>There are no reviews yet.</p>
-        </div>
-        <div class="col-md-3">
-            
-        </div>
-    </div> 
-</div> -->
+    </div>
+</div>
 {% endblock %}

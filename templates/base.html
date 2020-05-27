@@ -65,10 +65,10 @@
                                 <a class="nav-link" href="{% url 'home' %}" active>Home</a>                            
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>                            
+                                <a class="nav-link" href="{% url 'about' %}">About</a>                            
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'tours' %}">Tours</a>                            
+                                <a class="nav-link" href="{% url 'tourlist' %}">Tours</a>                            
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Events</a>                            
@@ -78,7 +78,7 @@
                             </li>
                             {% if user.is_authenticated %}                        
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>                         
+                                <a class="nav-link" href="{% url 'profile' user.id %}">{{ user.username }}</a>                         
                             </li>
                             {% else %}
                             <li class="nav-item">
@@ -142,13 +142,15 @@
                     <small>COPYRIGHT &copy; 2000-2020 TOUR BRIDGE MONGOLIA</small>
                 </div>
                 <div class="col-sm-12 col-md-6" id="botright">
-                    <a class="footer-link" href="#">HOME</a>
-                    <a class="footer-link" href="#">ABOUT</a>
-                    <a class="footer-link" href="#">TOURS</a>
+                    <a class="footer-link" href="{% url 'home' %}">HOME</a>
+                    <a class="footer-link" href="{% url 'about' %}">ABOUT</a>
+                    <a class="footer-link" href="{% url 'tourlist' %}">TOURS</a>
                     <a class="footer-link" href="#">EVENTS</a>
                     <a class="footer-link" href="#">BLOG</a>
                 </div>     
             </div>      
-        </div>
-    </body>
+        </div>        
+        {% block javascript %}
+        {% endblock %}
+    </body>    
 </html>

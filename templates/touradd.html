@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}
+Tours
+{% endblock %}
+
+{% block stylesheet %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row border rounded shadow mt-3 mb-3">
+        <div class="col-md-12 p-3">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-sm-12">
+                            <label for="name" class="font-weight-bold">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="font-weight-bold">Description:</label>
+                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="included" class="font-weight-bold">Included:</label>
+                            <textarea class="form-control" rows="3" id="included" name="included"></textarea>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="notincluded" class="font-weight-bold">Not included:</label>
+                            <textarea class="form-control" rows="3" id="notincluded" name="notincluded"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-3">
+                            <label for="duration" class="font-weight-bold">Duration:</label>
+                            <input type="number" class="form-control" id="duration" name="duration">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="views" class="font-weight-bold">Views:</label>
+                            <input type="number" class="form-control" id="views" name="views">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="likes" class="font-weight-bold">Likes:</label>
+                            <input type="number" class="form-control" id="likes" name="likes">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="rating" class="font-weight-bold">Rating:</label>
+                            <input type="number" class="form-control" id="rating" name="rating">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{% url 'touredit' %}" type="submit" class="btn btn-danger" style="color: white;">Cancel</a>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

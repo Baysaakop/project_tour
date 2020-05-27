@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid" id="head">
+    <div class="container text-center">
+        <h1 style="font-weight: bold;">TOUR BRIDGE MONGOLIA</h1>
+    </div>
+</div>
+
+<div class="container mb-5" id="aboutus">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About us</li>
+        </ol>
+    </nav>
+    <br>
+    <h2>ABOUT US</h2>
+    <hr>
+    <p>Tour Bridge Mongolia - Aenean eget lacus et ipsum consectetur iaculis eu vel ex. Vestibulum ullamcorper magna dolor, id finibus diam imperdiet vel. Nunc non orci auctor tellus pretium blandit quis non turpis. Vestibulum posuere massa at felis sagittis pellentesque. Curabitur maximus, leo non gravida volutpat, mi purus pulvinar ipsum, vel aliquam risus massa in leo. Mauris odio arcu, euismod vitae sem quis, tristique varius purus. Morbi suscipit in leo quis lobortis. Nam non aliquam odio. Nullam dictum sem sem, vel semper est ultricies quis.</p>
+    <h2>WHY CHOOSE US</h2>
+    <hr>
+    <h4>Diverse Destinations</h4>
+    <p>Sed aliquam pulvinar aliquet. Donec sed aliquam libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent tincidunt ullamcorper dapibus. Maecenas commodo pretium nisl, at egestas quam. Cras.</p>
+    <h4>Value for Money</h4>
+    <p>Nam sodales ligula eget posuere feugiat. Quisque urna est, consequat eu tincidunt eget, pellentesque at erat. Aenean ac lacinia magna. Duis interdum lorem urna, in laoreet purus suscipit in. Ut.</p>
+    <h4>Beautiful Places</h4>
+    <p>Phasellus porttitor tincidunt arcu tristique maximus. Nunc convallis mollis nibh ac rutrum. Vestibulum ut lacus non ante mattis convallis. Cras sed velit nunc. Vivamus laoreet, nunc ultrices ultrices bibendum, lacus.</p>
+    <h4>Fast Booking</h4>
+    <p>Vivamus vestibulum tellus sit amet tempor finibus. Proin vitae gravida leo. Nullam sit amet lacus facilisis, bibendum orci a, molestie urna. In elementum, lacus quis auctor vehicula, leo nisi molestie.</p>
+    <h4>Support Team</h4>
+    <p>Nullam nunc risus, commodo vitae est eleifend, scelerisque pharetra lectus. Phasellus arcu lacus, convallis quis diam sit amet, mattis pellentesque nulla. Sed feugiat nisl ligula, vitae suscipit tortor blandit id.</p>
+    <h4>Passionate Travel</h4>
+    <p>Phasellus maximus tortor eros. Nulla facilisi. Morbi rutrum odio eu felis sollicitudin tempor. Integer vel leo commodo, sodales ipsum id, posuere leo. Nullam quis dui enim. Sed aliquet quis lorem.</p>
+</div>
+{% endblock %}

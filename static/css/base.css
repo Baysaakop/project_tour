@@ -156,6 +156,11 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+#footer #top #about {
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
 #footer #top .content {
   padding-left: 25%;
 }

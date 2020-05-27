@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load tour_tags i18n static %}
+
+{% block title %}
+Tours
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/tours.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid" id="head">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <h1 style="font-weight: bold;">MONGOLIAN TOURS</h1>
+            </div>
+            <div class="col-md-6 col-lg-8">
+                <p class="header-text">Mongolia Tours offers wide variety of adventure tours, vacation packages, festival tours and small group photography tours in Mongolia. View all Mongolia tours and book today!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5" id="tours">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tours</li>
+                </ol>
+            </nav>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-lg-9">
+            {% for tour in tours %}
+            <div class="row shadow rounded border ml-0 mb-3" id="tour">
+                <div class="col-md-4 p-0" id="image">                  
+                    {% for image in images %}  
+                        {% if image.tour.id == tour.id %}
+                        <a href="{% url 'tour' tour.pk %}"><img class="tour-image rounded" src="{{ image.image.url }}" alt="Tour image cap"></a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 p-3 text-left detail">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <strong class="tour-name">{{ tour.name }}</strong>
+                        </div>
+                        <div class="col-md-4 text-center text-md-right">
+                            <div class="rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted">{{ tour.description }}</p>                   
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <strong>{{ tour.views }}</strong> Views
+                        </div>
+                        <div class="col-4">
+                            <strong>{{ tour.likes }}</strong> Likes
+                        </div>
+                        <div class="col-4">
+                            <strong>{{ tour.rating }}</strong> Rating
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 p-3 text-center detail"> 
+                    <h5>{{tour.currency}}{{ prices|get_min:tour }}</h5>
+                    <p class="text-muted">per person</p>
+                    <a href="{% url 'tour' tour.id %}" class="btn btn-outline-dark view" role="button">View tour</a>
+                </div>                
+            </div>
+            {% endfor %}             
+            <div class="p-3">           
+                {% include 'pagination.html' %}
+            </div>    
+        </div>
+        <div class="col-lg-3">
+            <div class="p-3 shadow rounded border" id="searchbar">
+                <h4>Search tours</h4>
+                <span>Find your dream tour today!</span>
+                <form action="#" class="mt-2">
+                    <strong>Search by Category:</strong>
+                    {% for type in types %}                    
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="{{ type.name }}" name="customRadio">
+                        <label class="custom-control-label" for="{{ type.name }}">{{ type.name }}</label>
+                    </div>
+                    {% endfor %} 
+                </form>
+                <form action="#" class="mt-2">
+                    <strong>Search by Region</strong>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="central" name="customRadio">
+                        <label class="custom-control-label" for="central">Central Mongolia</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="eastern" name="customRadio">
+                        <label class="custom-control-label" for="eastern">Eastern Mongolia</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="northern" name="customRadio">
+                        <label class="custom-control-label" for="northern">Northern Mongolia</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="southern" name="customRadio">
+                        <label class="custom-control-label" for="southern">Southern Mongolia</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="western" name="customRadio">
+                        <label class="custom-control-label" for="western">Western Mongolia</label>
+                    </div>
+                </form> 
+                <form action="#" class="mt-2">
+                    <strong>Search by Duration</strong>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="3-5" name="customRadio">
+                        <label class="custom-control-label" for="3-5">3 - 5 days</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="5-7" name="customRadio">
+                        <label class="custom-control-label" for="5-7">5 - 7 days</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="7-10" name="customRadio">
+                        <label class="custom-control-label" for="7-10">7 - 10 days</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="2week" name="customRadio">
+                        <label class="custom-control-label" for="2eek">2 weeks</label>
+                    </div>
+                </form> 
+                <form action="#" class="mt-2">
+                    <strong>Search by Price</strong>
+                </form> 
+            </form>
+        </div>            
+    </div>
+</div>
+</div>
+{% endblock %}

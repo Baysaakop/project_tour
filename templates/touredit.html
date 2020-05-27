@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}
+Tours
+{% endblock %}
+
+{% block stylesheet %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row border rounded shadow mt-3 mb-3">
+        <div class="col-md-6 p-3">
+            <form method="GET" action="." class="form-inline">
+                <label for="tourname" class="font-weight-bold mr-3">Select tour:</label>
+                <select name="tourname" id="tourname" class="form-control" onchange="submit()">
+                    <option selected>Choose...</option>
+                    {% for tour in tours %}
+                    <option value="{{ tour.name }}" {% if target == tour %} selected {% endif %}>{{ tour.name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        <div class="col-md-6 text-center text-sm-right p-3">
+            <button class="btn btn-secondary" style="width: 90px;" onclick="enable()">Edit</button>            
+            <a href="{% url 'touradd' %}" class="btn btn-primary" style="width: 90px; color: #ffffff;">Add</a>
+            <button class="btn btn-danger" style="width: 90px;">Remove</button>
+            <script>
+                function enable() {
+                    $("#fieldset").prop("disabled", false);    
+                }
+            </script>
+        </div>
+    </div>
+    {% if target is not None %}
+    <div class="row border rounded shadow mt-3 mb-3">
+        <div class="col-md-12 p-3">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <fieldset id="fieldset" disabled>
+                    <div class="form-row">
+                        <div hidden>
+                            <label for="pk" class="font-weight-bold">ID:</label>
+                            <input type="text" class="form-control" id="pk" name="pk" value="{{ target.pk }}">
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="name" class="font-weight-bold">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ target.name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="font-weight-bold">Description:</label>
+                        <textarea class="form-control" rows="5" id="description" name="description">{{ target.description }}</textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="included" class="font-weight-bold">Included:</label>
+                            <textarea class="form-control" rows="3" id="included" name="included">{{ tours.first.includes }}</textarea>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="notincluded" class="font-weight-bold">Not included:</label>
+                            <textarea class="form-control" rows="3" id="notincluded" name="notincluded">{{ tours.first.notincludes }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-3">
+                            <label for="duration" class="font-weight-bold">Duration:</label>
+                            <input type="number" class="form-control" id="duration" name="duration" value="{{ target.duration }}">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="views" class="font-weight-bold">Views:</label>
+                            <input type="number" class="form-control" id="views" name="views" value="{{ target.views }}">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="likes" class="font-weight-bold">Likes:</label>
+                            <input type="number" class="form-control" id="likes" name="likes" value="{{ target.views }}">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="rating" class="font-weight-bold">Rating:</label>
+                            <input type="number" class="form-control" id="rating" name="rating" value="{{ target.views }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
