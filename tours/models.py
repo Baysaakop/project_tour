@@ -25,6 +25,13 @@ class TourType(models.Model):
     def __str__(self):
         return self.name
 
+class TourImage(models.Model):
+    name = models.CharField(max_length=60)
+    image = models.ImageField(upload_to='tourimages/')
+
+    def __str__(self):
+        return self.name 
+
 class Tour(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)

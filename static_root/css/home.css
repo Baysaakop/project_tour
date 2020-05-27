@@ -1,0 +1,198 @@
+#carousel .carousel-inner img {
+  width: 100%;
+  height: auto;
+}
+
+#carousel .carousel-caption {
+  background: black;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+}
+
+@media screen and (max-width: 576px) {
+  #carousel .carousel-caption p {
+    visibility: hidden;
+    display: none;
+  }
+  #carousel .carousel-caption h1 {
+    font-size: medium;
+  }
+  #carousel .carousel-caption {
+    max-height: 60px;
+  }
+}
+
+#advantages hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
+}
+
+#advantages .fa {
+  padding: 13px;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 5px;
+  border-radius: 50%;
+  background: #141a16;
+  color: white;
+}
+
+#advantages .advantage-title {
+  font-size: 18px;
+}
+
+#advantages .advantage-text {
+  font-size: 16px;
+  color: grey;
+}
+
+#suggestedtours {
+  background: #ffffff;
+}
+
+#suggestedtours hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
+}
+
+#suggestedtours .vl {
+  border-left: 4px solid #141a16;
+  height: 30px;
+}
+
+#suggestedtours .btn-more {
+  border-radius: 20px;
+  min-width: 150px;
+  font-size: 18px;
+}
+
+#suggestedtours .card-img-top {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+}
+
+#suggestedtours .card-img-top:hover {
+  opacity: 0.5;
+}
+
+#suggestedtours .link-more {
+  color: #141a16;
+  text-decoration: none;
+}
+
+#suggestedtours .link-more:hover {
+  color: #141a16;
+  text-decoration: none;
+}
+
+#suggestedtours .link-more:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #141a16;
+  -webkit-transition: width .3s;
+  transition: width .3s;
+}
+
+#suggestedtours .link-more:hover::after {
+  width: 100%;
+  color: #141a16;
+}
+
+#suggestedtours .fa {
+  padding: 3px;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #141a16;
+}
+
+@media screen and (max-width: 576px) {
+  #suggestedtours .vl {
+    border-left: 4px solid #141a16;
+    height: 80px;
+  }
+}
+
+#events hr.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
+}
+
+#events .vl {
+  border-left: 4px solid #141a16;
+  height: 30px;
+}
+
+#events .btn-more {
+  border-radius: 20px;
+  min-width: 150px;
+  font-size: 18px;
+}
+
+#events .event {
+  position: relative;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+}
+
+#events .event:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#events .event .content {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+  bottom: 0;
+  background: black;
+  background: rgba(0, 0, 0, 0.75);
+  color: #f1f1f1;
+  width: 250px;
+  height: 40px;
+}
+
+@media screen and (max-width: 576px) {
+  #events .vl {
+    border-left: 4px solid #141a16;
+    height: 80px;
+  }
+}
+
+#blog .post img {
+  max-width: 80%;
+  height: auto;
+}
+
+#blog .post .text-block {
+  background: #ffffff;
+  color: #000000;
+  position: relative;
+  margin: -20% 20% 10% 20%;
+}
+
+#blog .post .btn-more {
+  border-radius: 20px;
+  min-width: 150px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 576px) {
+  #blog .post .text-block {
+    margin: 0% 10% 10% 10%;
+  }
+}
+/*# sourceMappingURL=home.css.map */
