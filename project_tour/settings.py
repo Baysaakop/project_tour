@@ -25,7 +25,7 @@ SECRET_KEY = 'oydoj%%6oaw1i+1qjq0cdv=t*or-=a*lds_&=2(swo#olv=90+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['montour.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['visit2mongolia.com', 'montour.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts',
     'tours'
-]
+]f
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
