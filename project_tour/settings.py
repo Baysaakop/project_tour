@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts',
     'tours'
-]f
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
