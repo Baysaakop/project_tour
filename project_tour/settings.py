@@ -25,7 +25,7 @@ SECRET_KEY = 'oydoj%%6oaw1i+1qjq0cdv=t*or-=a*lds_&=2(swo#olv=90+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['visit2mongolia.com', 'montour.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['www.visit2mongolia.com', 'montour.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
